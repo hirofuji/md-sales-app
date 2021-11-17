@@ -21,8 +21,8 @@ RUN apt-get update \
     && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
     && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E5267A6C \
     && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C300EE8C \
-    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu hirsute main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
-    && apt-get update \
+    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu hirsute main" > /etc/apt/sources.list.d/ppa_ondrej_php.list
+RUN apt-get update \
     && apt-get install -y php8.0-cli php8.0-dev \
        php8.0-gd php8.0-curl php8.0-memcached \
        php8.0-imap php8.0-mbstring \
@@ -51,16 +51,16 @@ RUN wget http://pear.php.net/go-pear.phar \
 #[custom]install connect msSqlServer libraryes
 # install Microsoft ODBC Driver for SQL Server (Microsoft ODBC 17)
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-RUN curl https://packages.microsoft.com/config/ubuntu/21.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+    && curl https://packages.microsoft.com/config/ubuntu/21.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 RUN apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools \
     && apt-get install -y unixodbc-dev
 # install php library for SQL Server
 RUN pecl install sqlsrv \
-    && pecl install pdo_sqlsrv
-RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/8.0/mods-available/sqlsrv.ini
-RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/8.0/mods-available/pdo_sqlsrv.ini
-RUN phpenmod -v 8.0 sqlsrv pdo_sqlsrv
+    && pecl install pdo_sqlsrv \
+    && printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/8.0/mods-available/sqlsrv.ini \
+    && printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/8.0/mods-available/pdo_sqlsrv.ini \
+    && phpenmod -v 8.0 sqlsrv pdo_sqlsrv
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
 
