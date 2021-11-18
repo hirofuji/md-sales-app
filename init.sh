@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 docker info > /dev/null 2>&1
 
@@ -14,3 +14,12 @@ docker run --rm \
     -w /opt \
     laravelsail/php80-composer:latest \
     bash -c "composer install"
+
+#create initial env
+cp .env.example .env
+
+#start container
+./vendor/bin/sail up -d
+
+#create app key
+./vendor/bin/sail artisan key:generate
