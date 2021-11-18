@@ -13,7 +13,7 @@ ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #setup basic command && PHP
-#[custom]add "wget", remove not use library.
+#[custom]add "wget", remove not use library. thank you!
 RUN apt-get update \
     && apt-get install -y gnupg gosu wget curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 \
     && mkdir -p ~/.gnupg \
