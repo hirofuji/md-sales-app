@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export APP_DIR=${APP_DIR:-$(pwd)}
-export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
+export APP_SERVICE=${APP_SERVICE:-"laravel.md-sales.test"}
 export WWWUSER=${WWWUSER:-$UID}
 export WWWGROUP=${WWWGROUP:-$(id -g)}
 export SAIL_USER=${SAIL_USER:-"sail"}
