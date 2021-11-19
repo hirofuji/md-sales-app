@@ -24,6 +24,7 @@ services:
         depends_on:
             - meilisearch
             - selenium
+            - sqlsrv
     meilisearch:
         image: 'getmeili/meilisearch:latest'
         platform: linux/x86_64
@@ -50,6 +51,21 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    sqlsrv:
+        # restart: always
+        image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+        container_name: 'mssql-2019-CU13'
+        user: root
+        environment:
+            - MSSQL_SA_PASSWORD=Jpmd_P@ssword7
+            - ACCEPT_EULA=Y
+            - MSSQL_PID=Standard
+        ports:
+            - '1433:1433'
+        volumes:
+            - ./mssql/data:/var/opt/mssql/data
+        networks:
+            - sail     
 networks:
     sail:
         driver: bridge
