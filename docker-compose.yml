@@ -53,6 +53,7 @@ services:
             - sail
     sqlsrv:
         image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+        #.env file "DB_HOST" must change to this container_name
         container_name: 'mssql-2019-CU13'
         user: root
         environment:
