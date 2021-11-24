@@ -52,12 +52,12 @@ services:
         networks:
             - sail
     sqlsrv:
-        image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+        image: mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04  
         #.env file "DB_HOST" must change to this container_name
         container_name: 'mssql-2019-CU13'
         user: root
         environment:
-            - MSSQL_SA_PASSWORD=Jpmd_P@ssword7
+            - MSSQL_SA_PASSWORD=Jpmd_P@ssword7 #this pass is for sa(username)
             - ACCEPT_EULA=Y
             - MSSQL_PID=Standard
         ports:
